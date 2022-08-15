@@ -1,0 +1,8 @@
+<div class="class">
+    <h5>app-first-render</h5>
+    <div *ngIf="canShow">
+        Componente renderizado se a variavle = true
+    </div>
+    <h4 *ngIf="name === 'Gustav'; else componentElse">O nome é Gustavo</h4>
+    <ng-template #componentElse>Name not found</ng-template>
+</div>
