@@ -7,31 +7,29 @@ import { ListService } from 'src/app/services/list.service';
 @Component({
   selector: 'app-list-render',
   templateUrl: './list-render.component.html',
-  styleUrls: ['./list-render.component.css']
+  styleUrls: ['./list-render.component.css'],
 })
 export class ListRenderComponent implements OnInit {
   animals: Animal[] = [];
 
   animalDetails!: string;
 
-  constructor(private listService: ListService) { 
+  constructor(private listService: ListService) {
     this.getAnimals();
   }
 
   getAnimals(): void {
-    this.listService.getAll().subscribe( (animals) => (this.animals = animals) );
+    this.listService.getAll().subscribe((animals) => (this.animals = animals));
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  showAge(animal: Animal): void{
+  showAge(animal: Animal): void {
     this.animalDetails = `O pet ${animal.name} tem ${animal.age} anos!`;
   }
 
-  removeAnimal(animalSelec: Animal){
-    console.log("Removendo animal")
-    this.animals = this.listService.remove(this.animals, animalSelec);
+  removeAnimal(animalSelec: Animal) {
+    this.animals = this.animals.filter((a) => animalSelec.name !== a.name);
+    this.listService.remove(animalSelec.id).subscribe();
   }
-
 }
